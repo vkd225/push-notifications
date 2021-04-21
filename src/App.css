@@ -57,6 +57,13 @@ input[type=file] {
   color: transparent;
 }
 
+input[type=url] {
+  width: 24%;
+  padding: 5;
+  margin: 8px 5px;
+  box-sizing: border-box;
+}
+
 input[type=checkbox] {
   cursor: pointer;
 }
