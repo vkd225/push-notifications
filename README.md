@@ -1,13 +1,22 @@
 # Create and Push a notification to your web application
 
+## Live App
+[https://push.vikash.dev/](https://push.vikash.dev/)
+
 ## To run the app in devlopment:
 
-`git clone git@github.com:vikashStr/push-notifications.git`
+run `git clone git@github.com:vikashStr/push-notifications.git` in your terminal
+
 cd into your directory
-create a .env file and paste your API key. Please refer `.env.example` file.
+
+create a .env file and paste your API key. Please refer `.env.example` file
+
 Navigate to `Config.ts` file and change `app_id` with your app id
+
 Run `yarn install` from the root of the project
+
 Run `yarn start` to start the devlopment server
+
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 ## Description
