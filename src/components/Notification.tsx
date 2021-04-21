@@ -1,9 +1,6 @@
 import React from "react";
 import Config from '../Config';
 import { PushNotification }  from '../services/PushNotification';
-import { PushButton } from './../assets/Icon';
-
-
 
 export default function  Notification (props: any) {
   const data = props
@@ -12,11 +9,6 @@ export default function  Notification (props: any) {
   const initialLoadingState = ''
 
   const { response, loading } = PushNotification(initialLoadingState, initialNotificationResponse, data)
-
-  const doSomeThing = () => {
-    console.log('change state here')
-
-  }
 
   return (
     <div>
@@ -44,9 +36,6 @@ export default function  Notification (props: any) {
         :
         null
       }
-      <div style={{ margin: 20, marginTop: 50, left: '10%', position: 'absolute' }}>
-        <PushButton className='ButtonIcon' onClick={doSomeThing} style ={{ cursor: 'pointer' }}/><span style= {{ verticalAlign: 'middle', fontWeight: 'bold' }}>Push one more</span>
-      </div>
     </div>
   );
 }

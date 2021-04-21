@@ -5,7 +5,7 @@ import { useCheckbox } from '../custom_hooks/useCheckbox';
 import Notification from './Notification';
 import { InitialNotification, InitialErrors, InitBrowsersEnabled } from './../data/InitialData'
 
-import { GoogleChromeIcon, FirefoxIcon, EdgeIcon } from './../assets/Icon';
+import { GoogleChromeIcon, FirefoxIcon, EdgeIcon, PushButton } from './../assets/Icon';
 
 import './../App.css';
 
@@ -19,6 +19,10 @@ export default function CreateForm() {
 
     const pushNotification = () => {
         submitNotification(true)
+    }
+
+    const pusAnotherNotification = () => {
+        submitNotification(false)
     }
 
     // event handlers from useForm
@@ -62,6 +66,8 @@ export default function CreateForm() {
                 </div>
 
                 <div>
+                    <input type="url" placeholder="Copy Image URL" onChange={handleImageChange}/>
+                    Or
                     <label> Upload image: </label>
                     <input id='picture' type='file'
                         onChange={handleImageChange}
@@ -87,8 +93,12 @@ export default function CreateForm() {
                     <FirefoxIcon style={{ height: '40px', width: '40px'}} />
 
                     {(browserErrors.noBrowserSelected) ?
-
                     <p className='Error' style={{ padding: 20 }}>You have to select at least one browser.</p>
+                    :
+                    (errors.messageLength || errors.titleLength) ?
+                    <div>
+                        <p className='Error' style={{ padding: 20 }}>Please fix the error above.</p>
+                    </div>
                     :
                     <div>
                         <button type='submit'>Submit</button>
@@ -102,7 +112,12 @@ export default function CreateForm() {
             </form>
 
             :
+            <div>
                 <Notification {...data} notification={notification}/>
+                <div style={{ margin: 20, marginTop: 50, left: '10%', position: 'absolute' }}>
+                    <PushButton className='ButtonIcon' onClick={pusAnotherNotification} style ={{ cursor: 'pointer' }}/><span style= {{ verticalAlign: 'middle', fontWeight: 'bold' }}>Push one more</span>
+                </div>
+            </div>
             }
         </div>
     );

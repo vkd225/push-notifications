@@ -38,7 +38,12 @@ export const useForm = (submitNotification: any, initialState: CreateNotificatio
     };
 
     const handleImageChange = (event: any) => {
-        if (event.target.files.length) {
+        if (event.target.type === 'url') {
+            setValues({...values,
+                imgPreview: event.target.value,
+                img: event.target.value
+            });
+        } else if (event.target.type === 'file' && event.target.files.length) {
             setValues({...values,
                 imgPreview: URL.createObjectURL(event.target.files[0]),
                 img: event.target.files[0]
