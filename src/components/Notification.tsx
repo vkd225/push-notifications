@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Config from '../Config';
 import { PushNotification }  from '../services/PushNotification';
+import { UploadImage }  from '../services/UploadImage';
 
 export default function  Notification (props: any) {
-  const data = props
+  let data = props
 
   const initialNotificationResponse = {}
   const initialLoadingState = ''
+  const initialImageUploadingState = ''
 
-  const { response, loading } = PushNotification(initialLoadingState, initialNotificationResponse, data)
+  const { awsS3URL, loadingImageURL } = UploadImage(data.chrome_web_image_base64, initialImageUploadingState)
+
+  let data_awsS3URL = {
+    chrome_web_image: awsS3URL
+  }
+  let notification_data = {...data, ...data_awsS3URL}
+
+  const { response, loading } = PushNotification(initialLoadingState, initialNotificationResponse, notification_data)
+  console.log('Image', loadingImageURL)
 
   return (
     <div>

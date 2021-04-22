@@ -37,17 +37,35 @@ export const useForm = (submitNotification: any, initialState: CreateNotificatio
         await submitNotification();
     };
 
-    const handleImageChange = (event: any) => {
+    const setImageData = async (file: any) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+
+        reader.onload = () => {
+            let fileInfo = {
+                name: file.name,
+                type: file.type,
+                size: Math.round(file.size / 1000) + ' kB',
+                base64: reader.result,
+                file: file,
+            };
+
+            setValues({...values,
+                img: fileInfo.base64,
+                imgPreview: URL.createObjectURL(file)
+            });
+        }
+    }
+
+    const handleImageChange = async (event: any) => {
         if (event.target.type === 'url') {
             setValues({...values,
                 imgPreview: event.target.value,
                 img: event.target.value
             });
         } else if (event.target.type === 'file' && event.target.files.length) {
-            setValues({...values,
-                imgPreview: URL.createObjectURL(event.target.files[0]),
-                img: event.target.files[0]
-            });
+            let file = event.target.files[0]
+            await setImageData (file)
         }
     };
 

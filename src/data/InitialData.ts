@@ -2,7 +2,7 @@ export const InitialNotification = {
     title: '',
     message: '',
     img: '',
-    imgPreview: null,
+    imgPreview: '',
     pushNotification: false
 };
 
