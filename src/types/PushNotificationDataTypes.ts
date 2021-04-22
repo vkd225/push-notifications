@@ -1,9 +1,9 @@
 type PushNotificationData = {
-    headings: object;
-    contents: object;
-    chrome_web_image: string;
-    isChromeWeb: boolean,
-    isFirefox: boolean,
+    headings: any;
+    contents: any;
+    chrome_web_image: any;
+    isChromeWeb: any,
+    isFirefox: any,
     // isWP_WNS: true,
 };
 

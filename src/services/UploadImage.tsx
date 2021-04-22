@@ -6,7 +6,7 @@ import * as HttpStatus from 'http-status-codes';
 
 export const UploadImage = (imgBase64: any, initialImageUploadingState: string) => {
 
-    const [awsS3URL, getAwsS3URL] = useState(imgBase64);
+    const [awsS3URL, getAwsS3URL] = useState('');
     const [loadingImageURL, setLoading] = useState(initialImageUploadingState);
 
     useEffect (() => {
@@ -30,14 +30,14 @@ export const UploadImage = (imgBase64: any, initialImageUploadingState: string) 
 
                 // Read response
                 let response = await result.json();
-                getAwsS3URL({ awsS3URL: response });
+                getAwsS3URL(response.toString());
+
             } catch (error) {
-                getAwsS3URL({ awsS3URL: 'Invalid URL', 'error': error});
+                getAwsS3URL('Invalid URL');
             }
         } else {
-            getAwsS3URL({ awsS3URL: data});
+            getAwsS3URL(data);
         }
-
         setLoading('returned')
     }
 

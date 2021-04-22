@@ -32,6 +32,7 @@ export default function CreateForm() {
     );
 
     const pusAnotherNotification = async () => {
+        values.imgPreview = ''
         submitNotification(false)
     }
 
@@ -39,7 +40,6 @@ export default function CreateForm() {
         headings: {"en": values.title},
         contents: {"en": values.message},
         chrome_web_image_base64: values.img,
-        // chrome_web_image: values.img,
         isChromeWeb: browsers.chrome,
         isFirefox: browsers.firefox
         // isWP_WNS: true
