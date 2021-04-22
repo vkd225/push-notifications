@@ -17,12 +17,8 @@ export default function CreateForm() {
     const initialErrors = InitialErrors
     const initBrowsersEnabled = InitBrowsersEnabled
 
-    const pushNotification = () => {
+    const pushNotification = async () => {
         submitNotification(true)
-    }
-
-    const pusAnotherNotification = () => {
-        submitNotification(false)
     }
 
     // event handlers from useForm
@@ -35,10 +31,15 @@ export default function CreateForm() {
         initBrowsersEnabled, initialErrors
     );
 
+    const pusAnotherNotification = async () => {
+        values.imgPreview = ''
+        submitNotification(false)
+    }
+
     let data = {
         headings: {"en": values.title},
         contents: {"en": values.message},
-        chrome_web_image: values.imgPreview,
+        chrome_web_image_base64: values.img,
         isChromeWeb: browsers.chrome,
         isFirefox: browsers.firefox
         // isWP_WNS: true
@@ -106,7 +107,7 @@ export default function CreateForm() {
                     }
                 </div>
 
-                <div>{(values.img !== '' && <img src={values.imgPreview} alt={values.img.name} className='Preview'/>)}
+                <div>{(values.imgPreview !== '' && <img src={values.imgPreview} alt='Preview' className='Preview'/>)}
                 </div>
 
             </form>

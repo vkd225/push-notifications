@@ -7,12 +7,9 @@ export const PushNotification = (initialLoadingState: string, initialNotificatio
     const [response, setResponse] = useState(initialNotificationResponse);
     const [loading, setLoading] = useState(initialLoadingState);
 
-
     useEffect (() => {
       postNotification(notificationData)
     }, []);
-
-
 
     const postNotification = async (data: any) => {
         setLoading('loading')
@@ -40,12 +37,15 @@ export const PushNotification = (initialLoadingState: string, initialNotificatio
 
           let res = await result.json()
 
-          // Bail if status code is not OK
-          // if (result.status === HttpStatus.StatusCodes.UNAUTHORIZED) {
-          //   setResponse({ response: {...res, 'error': ['Unauthorized User']} });
-          // } else if (result.status !== HttpStatus.StatusCodes.OK) {
-          //   setResponse({ response: {...res, 'error': ['Bad  Parameters']} });
-          // }
+          //if status code is not OK
+          if (result.status === HttpStatus.StatusCodes.UNAUTHORIZED) {
+            let unauthorized =  {unauthorized_user: true}
+            res = {...res, unauthorized}
+
+          } else if (result.status !== HttpStatus.StatusCodes.OK) {
+            let status_code =  {status_code: 'not ok'}
+            res = {...res, status_code}
+          }
 
           // Read response
           setResponse({ response: res });
